@@ -43,39 +43,62 @@ const supabase = createClient(supabaseUrl, supabaseKey);
 const formulario = document.getElementById('form-contacto');
 
 formulario.addEventListener('submit', async function(evento) {
-    // Evitamos que la página se recargue al enviar
+    // 1. Evitamos que la página se recargue inmediatamente
     evento.preventDefault();
 
-    // Cambiamos el texto del botón para que el usuario sepa que está cargando
+    // 2. Trampa para Bots (Honeypot) - Detener si está lleno
+    const botField = document.getElementById('honeypot').value;
+    if (botField !== "") {
+        console.warn("Bot detectado.");
+        return; 
+    }
+
+    // 3. Recolectamos y LIMPIAMOS los datos antes de enviar
+    const formData = new FormData(formulario);
+    const nombreRaw = formData.get('nombre').trim();
+    const emailRaw = formData.get('email').trim();
+    const mensajeRaw = formData.get('mensaje').trim();
+
+    // 4. VALIDACIONES DE SEGURIDAD Y LÓGICA
+    if (nombreRaw.length < 2) {
+        alert("El nombre es demasiado corto.");
+        return;
+    }
+
+    if (mensajeRaw.length < 10) {
+        alert("Por favor, escribe un mensaje un poco más detallado.");
+        return;
+    }
+
+    // 5. SANITIZACIÓN (Crear el objeto limpio)
+    const cleanData = {
+        nombre: nombreRaw.replace(/<[^>]*>?/gm, ''),
+        email: emailRaw,
+        motivo: formData.get('motivo'),
+        mensaje: mensajeRaw.replace(/<[^>]*>?/gm, '')
+    };
+
+    // 6. PREPARAR EL BOTÓN (FEEDBACK VISUAL)
     const boton = formulario.querySelector('button[type="submit"]');
     const textoOriginal = boton.innerHTML;
     boton.innerHTML = 'Enviando mensaje...';
     boton.disabled = true;
 
-    // Recolectamos lo que el usuario escribió
-    const formData = new FormData(formulario);
-    const datosUsuario = {
-        nombre: formData.get('nombre'),
-        email: formData.get('email'),
-        motivo: formData.get('motivo'),
-        mensaje: formData.get('mensaje')
-    };
-
-    // Enviamos a la base de datos de Supabase
+    // 7. ENVIAR LOS DATOS LIMPIOS A SUPABASE
     const { data, error } = await supabase
-        .from('mensajes') // El nombre exacto de la tabla que creaste
-        .insert([datosUsuario]);
+        .from('mensajes')
+        .insert([cleanData]); // <-- IMPORTANTE: Enviamos cleanData, no datosUsuario
 
-    // Revisamos si salió bien o mal
+    // 8. RESULTADO
     if (error) {
         console.error("Error al enviar:", error);
         alert("Los dioses del metal no nos dejaron enviar el mensaje. Intenta de nuevo.");
     } else {
         alert("¡Mensaje recibido! Nos pondremos en contacto pronto.");
-        formulario.reset(); // Limpiamos el formulario
+        formulario.reset(); 
     }
 
-    // Restauramos el botón
+    // 9. RESTAURAR BOTÓN
     boton.innerHTML = textoOriginal;
     boton.disabled = false;
 });
