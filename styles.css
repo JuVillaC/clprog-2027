@@ -1,0 +1,254 @@
+:root {
+    --cl-red: #c2191c;
+    --cl-black: #0a0a0a;
+    --cl-white: #ffffff;
+    --font-heavy: 'Oswald', sans-serif;
+    --font-main: 'Montserrat', sans-serif;
+}
+
+body {
+    background-color: var(--cl-black);
+    font-family: var(--font-main);
+    overflow-x: hidden;
+}
+
+.font-oswald { font-family: var(--font-heavy); }
+.text-danger { color: var(--cl-red) !important; }
+.bg-danger { background-color: var(--cl-red) !important; }
+.bg-black { background-color: var(--cl-black) !important; }
+
+/* Navbar */
+.custom-nav {
+    background: transparent;
+    padding-top: 20px;
+}
+.font-serif { font-family: "Times New Roman", serif; font-size: 1.5rem; }
+.small-text { font-family: var(--font-main); font-size: 0.7rem; letter-spacing: 2px; }
+
+/* Layout Hero */
+.hero-section {
+    min-height: 100vh;
+    padding-top: 0;
+}
+
+/* Franja Izquierda "Early Birds" */
+.early-bird-banner {
+    min-height: 100vh;
+    border-right: 5px solid var(--cl-red);
+}
+
+.giant-text {
+    font-size: 6rem;
+    line-height: 0.9;
+    letter-spacing: -2px;
+}
+
+/* Efecto de texto vertical para "VENTA TICKETS" */
+.vertical-text {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    transform: rotate(180deg);
+    margin: 0 auto;
+    font-size: 3rem;
+    letter-spacing: 5px;
+}
+
+.date-box {
+    font-size: 1.2rem;
+    border: 2px solid var(--cl-black);
+}
+
+/* Franja Derecha: Arte y Fechas */
+.hero-art {
+    min-height: 100vh;
+    background: linear-gradient(rgba(194, 25, 28, 0.7), rgba(10, 10, 10, 0.9)), 
+                url('https://images.unsplash.com/photo-1574169208507-84376144848b?q=80&w=2079') center/cover no-repeat;
+}
+
+.text-shadow-dark {
+    text-shadow: 4px 4px 0px var(--cl-black);
+}
+
+.tracking-widest { letter-spacing: 4px; }
+
+/* Contador */
+.count-box h2 {
+    font-size: 4rem;
+    margin-bottom: -10px;
+    text-shadow: 2px 2px 0px var(--cl-black);
+}
+.count-box span {
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+/* Botón Passline */
+.ticket-btn {
+    border-radius: 0;
+    border: 2px solid var(--cl-white);
+    transition: 0.3s;
+}
+.ticket-btn:hover:not(.disabled) {
+    background-color: var(--cl-white) !important;
+    color: var(--cl-red) !important;
+}
+.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Tarjetas de Tickets */
+.ticket-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-width: 2px;
+}
+
+.active-card {
+    box-shadow: 0 0 20px rgba(194, 25, 28, 0.2);
+}
+
+.active-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 30px rgba(194, 25, 28, 0.4);
+    background: linear-gradient(to bottom, rgba(194, 25, 28, 0.1), transparent) !important;
+}
+
+.locked-card {
+    opacity: 0.6;
+    background: repeating-linear-gradient(
+        45deg,
+        rgba(255, 255, 255, 0.03),
+        rgba(255, 255, 255, 0.03) 10px,
+        transparent 10px,
+        transparent 20px
+    ) !important;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+/* =========================================
+RESPONSIVE DESIGN (Móviles y Tablets)
+========================================= */
+@media (max-width: 768px) {
+    /* Ajustar la franja de Early Birds (Columna Izquierda) */
+    .early-bird-banner {
+        min-height: auto; /* Quitamos que ocupe toda la pantalla */
+        padding-top: 6rem !important; /* Damos espacio para que el menú no lo tape */
+        border-right: none; /* Quitamos la línea vertical roja... */
+        border-bottom: 5px solid var(--cl-red); /* ...y la ponemos horizontal abajo */
+    }
+
+    /* Transformar el texto vertical a horizontal para ahorrar espacio */
+    .vertical-text {
+        writing-mode: horizontal-tb; /* Vuelve a ser texto normal */
+        transform: none; /* Quitamos la rotación */
+        font-size: 2rem;
+        letter-spacing: 2px;
+        margin-bottom: 10px !important;
+    }
+
+    /* Achicar textos gigantes */
+    .giant-text {
+        font-size: 4rem;
+    }
+
+    /* Ajustar la zona del arte y contador (Columna Derecha) */
+    .hero-art {
+        min-height: 70vh; /* Que no sea tan largo en celular */
+        padding: 3rem 1rem;
+    }
+
+    .hero-art .display-4 { font-size: 2rem; }
+    .hero-art .display-3 { font-size: 2.5rem; }
+
+    .count-box h2 {
+        font-size: 2.5rem; /* Reloj más pequeño para que no se apelmace */
+    }
+
+    /* Acomodar los logos de los sponsors abajo */
+    .sponsors {
+        flex-direction: column; /* Ponemos un logo debajo de otro */
+        gap: 15px !important;
+    }
+    
+    .sponsors span {
+        border-left: none !important; /* Quitamos las rayitas separadoras */
+        padding: 0 !important;
+    }
+}
+
+/* Contenedor del Reproductor de Spotify */
+.spotify-wrapper {
+    background: linear-gradient(145deg, rgba(194, 25, 28, 0.15), rgba(10, 10, 10, 0.5));
+    border: 1px solid rgba(194, 25, 28, 0.3);
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+    transition: transform 0.4s ease, border-color 0.4s ease;
+}
+
+.spotify-wrapper:hover {
+    transform: translateY(-5px);
+    border-color: var(--cl-red);
+    box-shadow: 0 15px 40px rgba(194, 25, 28, 0.2);
+}
+
+/* Contenedor de Instagram */
+.ig-wrapper {
+    background: transparent;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.4s ease;
+}
+
+.ig-wrapper:hover {
+    transform: translateY(-5px);
+}
+
+/* Forzar que el iframe de Instagram se adapte al contenedor */
+.ig-wrapper iframe {
+    max-width: 100% !important;
+    border-radius: 8px;
+}
+
+/* Efecto hover para los enlaces del Navbar */
+.navbar-nav .nav-link {
+    transition: color 0.3s ease;
+}
+
+.navbar-nav .nav-link:hover {
+    color: var(--cl-red) !important;
+    text-shadow: 0 0 10px rgba(194, 25, 28, 0.5)!important;
+}
+
+/* Fondo para el menú desplegable en celulares */
+@media (max-width: 991px) {
+    .navbar-collapse {
+        background-color: rgba(10, 10, 12, 0.95);
+        padding: 15px;
+        border-radius: 8px;
+        border: 1px solid rgba(194, 25, 28, 0.2);
+        margin-top: 10px;
+    }
+}
+
+/* =========================================
+FOOTER STYLES
+========================================= */
+.footer-link {
+    text-decoration: none;
+    font-family: var(--font-heavy);
+    letter-spacing: 2px;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.footer-link:hover {
+    color: var(--cl-red) !important;
+    opacity: 1 !important;
+    text-shadow: 0 0 15px rgba(194, 25, 28, 0.6);
+    transform: translateY(-2px);
+    display: inline-block;
+}
