@@ -254,90 +254,21 @@ FOOTER STYLES
 }
 
 /* =========================================
-Estructura de Alineación Rítmica con Grid
+ALINEACIÓN EXACTA SOBRE EL CUADRO NEGRO
 ========================================= */
 
-/* Definir rítmicamente el ancho de la columna negra como una variable para control absoluto */
-:root {
-    --sidebar-width: 25vw; /* Usa 'vw' para un diseño rítmico adaptable, o 'px' si lo quieres rígidamente fijo */
+/* En celulares, el cuadro negro ocupa toda la pantalla, así que lo empujamos un poco a la izquierda para que no quede pegado al borde */
+.logo-box {
+    padding-left: 1.5rem;
 }
 
-/* El contenedor principal rítmico orquesta el Grid */
-.site-wrap {
-    display: grid;
-    grid-template-columns: var(--sidebar-width) 1fr; /* Columna 1 rítmica, Columna 2 resto */
-    grid-template-rows: auto 1fr; /* Cabecera auto, cuerpo 1fr rítmico */
-    height: 100vh; /* Altura rítmica total de la pantalla */
-}
-
-/* =========================================
-Cabecera Rítmica
-========================================= */
-
-/* Forzar rítmicamente que la cabecera siga la misma estructura de columnas */
-.main-header {
-    grid-column: 1 / -1; /* Ocupa rítmicamente toda la anchura */
-    grid-row: 1;
-    display: grid;
-    grid-template-columns: var(--sidebar-width) 1fr; /* Misma definición rítmica */
-    background: transparent;
-    padding: 20px 0;
-    position: fixed; /* o sticky */
-    width: 100%;
-    top: 0;
-    z-index: 1000;
-}
-
-/* El contenedor del logo: Rítmicamente contenido en la primera columna (negra) */
-.logo-container {
-    grid-column: 1;
-    padding: 0 20px; /* Espaciado interno rítmico */
-    display: flex;
-    align-items: center;
-}
-
-/* El menú de navegación: Rítmicamente contenido en la segunda columna (roja) */
-.main-nav {
-    grid-column: 2;
-    padding: 0 50px; /* espaciado interno rítmico */
-    display: flex;
-    justify-content: flex-end; /* Alineado rítmicamente a la derecha */
-    align-items: center;
-}
-
-/* =========================================
-Cuerpo Rítmico
-========================================= */
-
-/* Contenedor principal para sidebar y hero rítmico */
-.main-content {
-    grid-column: 1 / -1;
-    grid-row: 2;
-    display: grid;
-    grid-template-columns: var(--sidebar-width) 1fr; /* Misma definición rítmica */
-    margin-top: 80px; /* Altura rítmica de la cabecera */
-}
-
-/* Sidebar izquierdo: Rítmicamente contenido en la primera columna, con fondo negro */
-.left-sidebar {
-    grid-column: 1;
-    background-color: black;
-    color: white;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end; /* Contenido vertical al final rítmicamente */
-    align-items: flex-start;
-}
-
-/* Hero derecho: Rítmicamente contenido en la segunda columna, con fondo rojo */
-.right-hero {
-    grid-column: 2;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    color: white;
-    background-color: #990000; /* o imagen de fondo rítmica */
-    padding: 50px;
+/* En tablets y PC, copiamos el comportamiento de las columnas de Bootstrap */
+@media (min-width: 768px) {
+    .logo-box {
+        /* Si tu cuadro negro es "col-md-3", deja esto en 25%. 
+           Si tu cuadro negro es "col-md-4", cámbialo a 33.333% */
+        width: 25%; 
+        padding-left: 0;
+        justify-content: center; /* Centra el logo milimétricamente */
+    }
 }
