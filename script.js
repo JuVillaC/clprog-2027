@@ -43,23 +43,23 @@ const supabase = createClient(supabaseUrl, supabaseKey);
 const formulario = document.getElementById('form-contacto');
 
 formulario.addEventListener('submit', async function(evento) {
-    // 1. Evitamos que la página se recargue inmediatamente
+    // Evitamos que la página se recargue inmediatamente
     evento.preventDefault();
 
-    // 2. Trampa para Bots (Honeypot) - Detener si está lleno
+    // Trampa para Bots (Honeypot) - Detener si está lleno
     const botField = document.getElementById('honeypot').value;
     if (botField !== "") {
         console.warn("Bot detectado.");
         return; 
     }
 
-    // 3. Recolectamos y LIMPIAMOS los datos antes de enviar
+    // Recolectamos y LIMPIAMOS los datos antes de enviar
     const formData = new FormData(formulario);
     const nombreRaw = formData.get('nombre').trim();
     const emailRaw = formData.get('email').trim();
     const mensajeRaw = formData.get('mensaje').trim();
 
-    // 4. VALIDACIONES DE SEGURIDAD Y LÓGICA
+    // VALIDACIONES DE SEGURIDAD Y LÓGICA
     if (nombreRaw.length < 2) {
         alert("El nombre es demasiado corto.");
         return;
@@ -70,7 +70,7 @@ formulario.addEventListener('submit', async function(evento) {
         return;
     }
 
-    // 5. SANITIZACIÓN (Crear el objeto limpio)
+    // SANITIZACIÓN (Crear el objeto limpio)
     const cleanData = {
         nombre: nombreRaw.replace(/<[^>]*>?/gm, ''),
         email: emailRaw,
@@ -78,27 +78,28 @@ formulario.addEventListener('submit', async function(evento) {
         mensaje: mensajeRaw.replace(/<[^>]*>?/gm, '')
     };
 
-    // 6. PREPARAR EL BOTÓN (FEEDBACK VISUAL)
+    // PREPARAR EL BOTÓN (FEEDBACK VISUAL)
     const boton = formulario.querySelector('button[type="submit"]');
     const textoOriginal = boton.innerHTML;
     boton.innerHTML = 'Enviando mensaje...';
     boton.disabled = true;
 
-    // 7. ENVIAR LOS DATOS LIMPIOS A SUPABASE
+    // ENVIAR LOS DATOS LIMPIOS A SUPABASE
     const { data, error } = await supabase
         .from('mensajes')
         .insert([cleanData]); // <-- IMPORTANTE: Enviamos cleanData, no datosUsuario
 
-    // 8. RESULTADO
+    // RESULTADO
     if (error) {
         console.error("Error al enviar:", error);
-        alert("Los dioses del metal no nos dejaron enviar el mensaje. Intenta de nuevo.");
+        // TRUCO: Mostramos el mensaje exacto de Supabase en el alert
+        alert("Bloqueo de Supabase detectado. Motivo: " + error.message + " | Detalles: " + error.details);
     } else {
         alert("¡Mensaje recibido! Nos pondremos en contacto pronto.");
         formulario.reset(); 
     }
 
-    // 9. RESTAURAR BOTÓN
+    // RESTAURAR BOTÓN
     boton.innerHTML = textoOriginal;
     boton.disabled = false;
 });
