@@ -5,7 +5,7 @@
 
 Una Landing Page inmersiva y de alto rendimiento diseñada para la edición 2027 del festival de metal progresivo **CL.PROG**. Desarrollada con un enfoque "Mobile-First" y estética oscura/industrial.
 
-🔗 **[Ver Sitio en Vivo (Live Demo)](https://clprog-juanvilla.netlify.app/)**
+🔗 **[Ver Sitio en Vivo (Live Demo)](https://clprog-2027.netlify.app/)**
 
 ---
 
