@@ -272,3 +272,34 @@ ALINEACIÓN EXACTA SOBRE EL CUADRO NEGRO
         justify-content: center; /* Centra el logo milimétricamente */
     }
 }
+
+/* =========================================
+FORMULARIO DE CONTACTO
+========================================= */
+.custom-input {
+    background-color: rgba(0, 0, 0, 0.6);
+    border: 1px solid #333;
+    color: white;
+    border-radius: 0; /* Bordes cuadrados, más agresivos */
+    padding: 12px 15px;
+    transition: all 0.3s ease;
+}
+
+/* Cuando el usuario hace clic para escribir (Focus) */
+.custom-input:focus {
+    background-color: rgba(0, 0, 0, 0.9);
+    border-color: var(--cl-red);
+    color: white;
+    box-shadow: 0 0 10px rgba(194, 25, 28, 0.3); /* Resplandor rojo */
+}
+
+/* Cambiar el fondo de las opciones del selector (dropdown) */
+.custom-input option {
+    background-color: #1a1a1a;
+    color: white;
+}
+
+/* Cambiar el color del texto falso (placeholder) */
+.custom-input::placeholder {
+    color: rgba(255, 255, 255, 0.3);
+}

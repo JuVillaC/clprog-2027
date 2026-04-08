@@ -33,6 +33,7 @@
                     <li class="nav-item"><a class="nav-link text-white font-oswald text-uppercase" href="#recomendados">Rituales</a></li>
                     <li class="nav-item"><a class="nav-link text-white font-oswald text-uppercase" href="#playlist">Playlist</a></li>
                     <li class="nav-item"><a class="nav-link text-white font-oswald text-uppercase" href="#memorias">Galería</a></li>
+                    <li class="nav-item"><a class="nav-link text-white font-oswald text-uppercase" href="#contacto">Contacto</a></li>
                 </ul>
             </div>
         </div>
@@ -252,6 +253,56 @@
             </div>
             
             <script async src="//www.instagram.com/embed.js"></script>
+        </div>
+    </section>
+
+    <section id="contacto" class="py-5 bg-dark border-top border-danger">
+        <div class="container py-5">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center mb-5">
+                <h2 class="font-serif text-white display-4 mb-3">¡Contáctanos!</h2>
+                    <p style="color: #FFF;">¿Tienes dudas sobre el festival o tu banda quiere ser parte del cartel? Déjanos tu mensaje.</p>
+                </div>
+            </div>
+            
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <form name="contacto-clprog" method="POST" data-netlify="true" class="contact-form">
+                        <div class="row g-4">
+                            
+                            <div class="col-md-6">
+                                <label class="form-label text-white tracking-widest small-text">NOMBRE / BANDA</label>
+                                <input type="text" name="nombre" class="form-control custom-input" required>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <label class="form-label text-white tracking-widest small-text">CORREO ELECTRÓNICO</label>
+                                <input type="email" name="email" class="form-control custom-input" required>
+                            </div>
+                            
+                            <div class="col-12">
+                                <label class="form-label text-white tracking-widest small-text">MOTIVO</label>
+                                <select name="motivo" class="form-select custom-input" required>
+                                    <option value="" disabled selected>Selecciona una opción...</option>
+                                    <option value="Duda General">Duda General / Tickets</option>
+                                    <option value="Postulacion Banda">Postulación de Banda</option>
+                                    <option value="Prensa Medios">Prensa / Medios</option>
+                                </select>
+                            </div>
+                            
+                            <div class="col-12">
+                                <label class="form-label text-white tracking-widest small-text">MENSAJE</label>
+                                <textarea name="mensaje" rows="5" class="form-control custom-input" placeholder="Cuéntanos..." required></textarea>
+                            </div>
+                            
+                            <div class="col-12 text-center mt-5">
+                                <button type="submit" class="btn btn-outline-danger btn-lg rounded-0 px-5 font-oswald tracking-widest">ENVIAR MENSAJE</button>
+                            </div>
+                            
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
     </section>
 
